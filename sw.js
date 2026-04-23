@@ -1,4 +1,4 @@
-const CACHE = 'oui-oui-chef-v24';
+const CACHE = 'oui-oui-chef-v25';
 const CACHED_URLS = ['./'];
 
 self.addEventListener('install', e => {
