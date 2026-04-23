@@ -431,7 +431,7 @@ __setMsg('1: HTML OK');
         var recipes = results[0], state = results[1], images = results[2];
         if(window.__setMsg) window.__setMsg('4: dane załadowane');
         if(recipes) window.RECIPES_DATA = recipes;
-        if(state)   window.__DIET_STATE__ = state;
+        if(state && !localStorage.getItem('dietPlaner_planData')) window.__DIET_STATE__ = state;
         if(images)  window.__DIET_IMAGES__ = images;
         if(!recipes) window.__NEEDS_ONBOARDING__ = true;
         window.__APP_DATA_LOADING__ = false;
