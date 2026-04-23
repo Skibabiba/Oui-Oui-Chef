@@ -410,11 +410,18 @@ __setMsg('1: HTML OK');
     window.__APPDB_GET__ = function(k){ return idbGet(db,k); };
 
     if(hasRecipes){
-      // Desktop mode: data/ files loaded, render immediately
-      // IDB state may be more recent (e.g. last PWA session) — skip override here,
-      // File System API is source of truth on desktop.
-      window.__DATA_READY__ = true;
-      if(window.__RENDER_APP__) window.__RENDER_APP__();
+      // Desktop mode: data/ files loaded. Load banner images from IDB before render.
+      idbGet(db,'images').then(function(idbImages){
+        if(idbImages && idbImages.bannerImages){
+          window.__DIET_IMAGES__ = window.__DIET_IMAGES__ || {};
+          window.__DIET_IMAGES__.bannerImages = idbImages.bannerImages;
+        }
+        window.__DATA_READY__ = true;
+        if(window.__RENDER_APP__) window.__RENDER_APP__();
+      }).catch(function(){
+        window.__DATA_READY__ = true;
+        if(window.__RENDER_APP__) window.__RENDER_APP__();
+      });
       return;
     }
 
