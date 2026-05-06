@@ -412,10 +412,14 @@ __setMsg('1: HTML OK');
 
     if(hasRecipes){
       // Desktop mode: data/ files loaded. Load banner images from IDB before render.
-      idbGet(db,'images').then(function(idbImages){
+      Promise.all([idbGet(db,'images'),idbGet(db,'recipeOverrides')]).then(function(results){
+        var idbImages=results[0],idbRecipeOverrides=results[1];
         if(idbImages && idbImages.bannerImages){
           window.__DIET_IMAGES__ = window.__DIET_IMAGES__ || {};
           window.__DIET_IMAGES__.bannerImages = idbImages.bannerImages;
+        }
+        if(idbRecipeOverrides && Object.keys(idbRecipeOverrides).length){
+          window.__SYNC_RECIPE_OVERRIDES__ = idbRecipeOverrides;
         }
         window.__DATA_READY__ = true;
         if(window.__RENDER_APP__) window.__RENDER_APP__();
