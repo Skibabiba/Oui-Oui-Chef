@@ -445,6 +445,7 @@ __setMsg('1: HTML OK');
         if(recipes) window.RECIPES_DATA = recipes;
         if(state && !localStorage.getItem('dietPlaner_planData')) window.__DIET_STATE__ = state;
         if(state && state.recipeOverrides && Object.keys(state.recipeOverrides).length) window.__SYNC_RECIPE_OVERRIDES__ = state.recipeOverrides;
+        if(state && state.planData && Object.keys(state.planData).length) window.__SYNC_PLAN_DATA__ = state.planData;
         if(images)  window.__DIET_IMAGES__ = images;
         if(!recipes) window.__NEEDS_ONBOARDING__ = true;
         window.__APP_DATA_LOADING__ = false;
