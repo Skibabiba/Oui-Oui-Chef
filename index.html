@@ -449,6 +449,7 @@ __setMsg('1: HTML OK');
         if(state && state.recipeOverrides && Object.keys(state.recipeOverrides).length) window.__SYNC_RECIPE_OVERRIDES__ = state.recipeOverrides;
         if(state && state.savedProfiles && state.savedProfiles.length) window.__SYNC_SAVED_PROFILES__ = state.savedProfiles;
         if(state && state.planData && Object.keys(state.planData).length) window.__SYNC_PLAN_DATA__ = state.planData;
+        if(state && state.customRecipes && state.customRecipes.length) window.__SYNC_CUSTOM_RECIPES__ = state.customRecipes.filter(function(r){return String(r.id).startsWith('custom_');});
         if(images)  window.__DIET_IMAGES__ = images;
         if(!recipes) window.__NEEDS_ONBOARDING__ = true;
         window.__APP_DATA_LOADING__ = false;
